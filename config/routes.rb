@@ -1,10 +1,12 @@
 Sample::Application.routes.draw do
+  resources :posts
+
   #get "user_sessions/new"
   #get "user_sessions/create"
   #get "user_sessions/destroy"
   #resources :users
 
-  root :to => 'users#index'
+  root :to => 'posts#index'
 resources :user_sessions
 resources :users
 

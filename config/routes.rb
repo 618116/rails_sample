@@ -1,5 +1,7 @@
 Sample::Application.routes.draw do
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
 
   #get "user_sessions/new"
   #get "user_sessions/create"

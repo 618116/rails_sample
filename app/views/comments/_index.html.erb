@@ -1,0 +1,17 @@
+<h3>Comments</h3>
+
+<ul>
+  <% if @post.comments.size < 2 %>
+    <li>No comments.</li>
+  <% else %>
+    <% @post.comments.each do |comment| %>
+      <% unless comment.id.nil? %>
+        <li>
+        <%= comment.body %>
+        (<%= link_to 'Edit', edit_post_comment_path(@post, comment) %> |
+        <%= link_to 'Destroy', post_comment_path(@post, comment), confirm: 'Are you sure?', method: :delete %>)
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>

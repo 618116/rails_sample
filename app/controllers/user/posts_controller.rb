@@ -1,22 +1,28 @@
-class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+class User::PostsController < ApplicationController
+	before_action :set_post, only: [:show, :edit, :update, :destroy]
+	before_filter :load_user
+
+  def load_user
+  	@user = User.find(params[:user_id])
+  end
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = @user.posts
+    @comments = @user.comments
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-    #@post = Post.find(params[:id])
+    @post = @user.posts.find(params[:id])
     @comment = @post.comments.build
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = @user.posts.build
   end
 
   # GET /posts/1/edit
@@ -26,7 +32,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = @user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -66,11 +72,12 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @user = User.find(params[:user_id])
+      @post = @user.posts.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:current_user.id :title, :texts)
+      params.require(:post).permit(:user_id, :title, :texts)
     end
 end

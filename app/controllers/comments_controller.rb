@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
 
   # GET /comments
   # GET /comments.json
-  #def index
-  #  @comments = @post.comments.all
-  #end
+  def index
+    @comments = @post.comments
+  end
 
   # GET /comments/1
   # GET /comments/1.json
@@ -29,12 +29,12 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @post.comments.build(comment_params)
+    @comment = @post.comments.build(comment_params.merge(:user_id => current_user.id))
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post }
-        format.json { render action: 'show', status: :created, location: @comment}
+        #format.json { render action: 'show', status: :created, location: @comment}
       else
         format.html { render action: 'new' }
         format.json { render json: @post.errors, status: :unprocessable_entity }

@@ -1,0 +1,39 @@
+<h3>記事一覧</h3>
+
+<table>
+  <!--thead>
+    <tr>
+      <th>Title</th>
+      <th>Texts</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead-->
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= link_to "#{post.title}", user_post_path(current_user.id,post.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <h3> Comments </h3>
+
+  <ul>
+    <% @comments.each do |comment| %>
+      <li>
+        <%= link_to "#{comment.body}", user_post_path(current_user.id,comment.post_id) %>
+      </li>
+    <% end %>
+  </ul>
+
+
+
+
+
+<br>
+
+<%= link_to 'New Post', new_user_post_path %>

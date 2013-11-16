@@ -9,10 +9,12 @@
   <body>
 
   <div id="nav">
-    <h2><%= link_to "BLOG", posts_path %></h2>
+    
     <% if current_user %>
+      <%= link_to "Home", posts_path %>
       <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
       <%= link_to "Logout", :logout, method: :post %>
+      <%= link_to "My page", user_posts_path(current_user.id) %>
     <% else %>
       <%= link_to "Register", new_user_path %> |
       <%= link_to "Login", :login %>

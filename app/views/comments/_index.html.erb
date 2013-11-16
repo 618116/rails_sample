@@ -8,8 +8,10 @@
       <% unless comment.id.nil? %>
         <li>
         <%= comment.body %>
-        (<%= link_to 'Edit', edit_post_comment_path(@post, comment) %> |
-        <%= link_to 'Destroy', post_comment_path(@post, comment), confirm: 'Are you sure?', method: :delete %>)
+        <% if comment.user_id == current_user.id %>
+          (<%= link_to 'Edit', edit_post_comment_path(@post, comment) %> |
+          <%= link_to 'Destroy', post_comment_path(@post, comment), confirm: 'Are you sure?', method: :delete %>)
+        <% end %>
         </li>
       <% end %>
     <% end %>

@@ -1,7 +1,21 @@
 Sample::Application.routes.draw do
+  #resources :users do
+  #  resources :userposts do
+  #    resources :comments
+  #  end
+  #end
+
   resources :posts do
     resources :comments
   end
+
+  resources :users do
+    resources :posts, 
+      controller: 'user/posts' do
+      resources :comments
+      end
+    end
+
 
   #get "user_sessions/new"
   #get "user_sessions/create"
@@ -10,7 +24,7 @@ Sample::Application.routes.draw do
 
   root :to => 'posts#index'
 resources :user_sessions
-resources :users
+
 
 get 'login' => 'user_sessions#new', :as => :login
 post 'logout' => 'user_sessions#destroy', :as => :logout

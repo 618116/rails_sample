@@ -14,7 +14,7 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= link_to "#{post.title}", user_post_path(current_user.id,post.id) %></td>
+        <td><%= link_to "#{post.title}", user_post_path(post.user_id,post.id) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,7 +25,7 @@
   <ul>
     <% @comments.each do |comment| %>
       <li>
-        <%= link_to "#{comment.body}", user_post_path(current_user.id,comment.post_id) %>
+        <%= link_to "#{comment.body}", user_post_path(comment.post.user_id,comment.post_id) %>
       </li>
     <% end %>
   </ul>

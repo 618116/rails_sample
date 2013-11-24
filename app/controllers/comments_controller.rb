@@ -2,10 +2,6 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_filter :load_post
 
-  def load_post
-    @post = Post.find(params[:post_id])
-  end
-
   # GET /comments
   # GET /comments.json
   def index
@@ -67,6 +63,11 @@ class CommentsController < ApplicationController
   end
 
   private
+
+    def load_post
+      @post = Post.find(params[:post_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @post = Post.find(params[:post_id])
